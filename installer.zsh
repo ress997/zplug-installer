@@ -1,19 +1,16 @@
-#!/bin/zsh
-
-# Release some autoloads
-autoload -Uz colors; colors
-autoload -Uz is-at-least; is-at-least
-
-typeset    TMPFILE="/tmp/.zplug-$$$RANDOM"
+#!/usr/bin/env zsh
 
 if [[ -z $ZSH_VERSION ]]; then
     printf "zplug requires zsh 4.1.9 or newer\n"
     exit 1
 fi
 
-if [[ -z $ZPLUG_HOME ]]; then
-    export ZPLUG_HOME=~/.zplug
-fi
+# Release some autoloads
+autoload -Uz colors; colors
+autoload -Uz is-at-least; is-at-least
+
+typeset TMPFILE="/tmp/.zplug-$$$RANDOM"
+typeset ZPLUG_HOME=${ZPLUG_HOME:-"~/.zplug"}
 
 spin()
 {
@@ -136,7 +133,7 @@ execute \
     "Is git installed?" \
     --error \
     "Does '$ZPLUG_HOME' already exist?" \
-    "git clone https://github.com/zplug/zplug.git $ZPLUG_HOME"
+    "git clone https://github.com/${ZPLUG_PACKAGE:-"ress997/zplug"}.git $ZPLUG_HOME"
 
 
 printf " All processes are successfully completed \U1F389\n"
